@@ -1,11 +1,11 @@
-## Hashed Chain
+## Liberland Soil Chain
 
-### [Open Hashed Chain on polkadot.js.org](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fn1.hashed.systems#/explorer)
+### [Open Liberland Soil Chain on polkadot.js.org](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fn1.hashed.systems#/explorer)
 
 ## Features
 ### Standard Pallets
 #### [Identity](https://wiki.polkadot.network/docs/learn-identity)
-Hashed Chain provides a naming system that allows participants to add information, such as social media accounts, web domains, email addresses, etc. to their on-chain account and subsequently ask for verification of this information by registrars.
+Liberland Soil Chain provides a naming system that allows participants to add information, such as social media accounts, web domains, email addresses, etc. to their on-chain account and subsequently ask for verification of this information by registrars.
 
 #### [Indices](https://wiki.polkadot.network/docs/learn-accounts#indices)
 An index is a short and easy-to-remember version of an address. Claiming an index requires a deposit that is released when the index is cleared.
