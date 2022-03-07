@@ -2,16 +2,16 @@ version: "3.2"
 
 services:
   dev:
-    container_name: hashed
+    container_name: liberland
     image: paritytech/ci-linux:974ba3ac-20201006
-    working_dir: /var/www/hashed
+    working_dir: /var/www/liberland
     ports:
       - "9944:9944"
     environment:
-      - CARGO_HOME=/var/www/hashed/.cargo
+      - CARGO_HOME=/var/www/liberland/.cargo
     volumes:
-      - .:/var/www/hashed
+      - .:/var/www/liberland
       - type: bind
         source: ./.local
         target: /root/.local
-    command: bash -c "cargo build --release && ./target/release/hashed --dev --ws-external"
+    command: bash -c "cargo build --release && ./target/release/liberland --dev --ws-external"

@@ -1,4 +1,4 @@
-use hashed_runtime::{
+use liberland_runtime::{
 	AccountId, AuraConfig, BalancesConfig, CouncilConfig, GenesisConfig, GrandpaConfig, Signature,
 	SudoConfig, SystemConfig, WASM_BINARY,
 };
@@ -37,16 +37,16 @@ pub fn authority_keys_from_seed(s: &str) -> (AuraId, GrandpaId) {
 	(get_from_seed::<AuraId>(s), get_from_seed::<GrandpaId>(s))
 }
 
-fn hashed_properties() -> sc_chain_spec::Properties {
+fn liberland_properties() -> sc_chain_spec::Properties {
 	let mut p = Properties::new();
 	p.insert("prefix".into(), 51.into());
-	p.insert("network".into(), "hashed".into());
-	p.insert("displayName".into(), "Hashed Systems".into());
-	p.insert("tokenSymbol".into(), "HSD".into());
+	p.insert("network".into(), "liberland".into());
+	p.insert("displayName".into(), "Liberland Soil".into());
+	p.insert("tokenSymbol".into(), "LBS".into());
 	p.insert("tokenDecimals".into(), 12.into());
 	p.insert("standardAccount".into(), "*25519".into());
 	p.insert("ss58Format".into(), 51.into());
-	p.insert("website".into(), "https://hashed.systems".into());
+	p.insert("website".into(), "https://liberland.network/".into());
 	p
 }
 
@@ -82,7 +82,9 @@ pub fn development_config() -> Result<ChainSpec, String> {
 		None,
 		// Protocol ID
 		None,
-		// Properties
+		// Fork_id
+		None,
+		// Extensions
 		None,
 		// Extensions
 		None,
@@ -128,22 +130,24 @@ pub fn local_testnet_config() -> Result<ChainSpec, String> {
 		// Telemetry
 		None,
 		// Protocol ID
-		Some("hashed"),
-		// Properties
-		Some(hashed_properties()),
-		// Extensions
+		Some("liberland"),
+		// Fork_id
 		None,
+		// Properties
+		Some(liberland_properties()),
+		// Extensions
+		None
 	))
 }
 
-pub fn chaos_config() -> Result<ChainSpec, String> {
+pub fn soil_config() -> Result<ChainSpec, String> {
 	let wasm_binary = WASM_BINARY.ok_or_else(|| "Testnet wasm not available".to_string())?;
 
 	Ok(ChainSpec::from_genesis(
 		// Name
-		"Hashed Chain - Chaos",
+		"Liberland Soil Chain",
 		// ID
-		"chaos",
+		"soil",
 		ChainType::Live,
 		move || {
 			testnet_genesis(
@@ -165,9 +169,11 @@ pub fn chaos_config() -> Result<ChainSpec, String> {
 		// Telemetry
 		None,
 		// Protocol ID
-		Some("hashed"),
+		Some("liberland"),
+		// Fork_id
+		None,
 		// Properties
-		Some(hashed_properties()),
+		Some(liberland_properties()),
 		// Extensions
 		None,
 	))
@@ -205,7 +211,7 @@ fn testnet_genesis(
 		treasury: Default::default(),
 		assets: Default::default(),
 		// bounties: Default::default(),
-		sudo: SudoConfig { key: root_key },
+		sudo: SudoConfig { key: Some(root_key) },
 		transaction_payment: Default::default(),
 	}
 }

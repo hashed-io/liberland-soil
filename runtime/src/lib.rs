@@ -95,8 +95,8 @@ pub mod opaque {
 //   https://docs.substrate.io/v3/runtime/upgrades#runtime-versioning
 #[sp_version::runtime_version]
 pub const VERSION: RuntimeVersion = RuntimeVersion {
-	spec_name: create_runtime_str!("hashed"),
-	impl_name: create_runtime_str!("hashedx"),
+	spec_name: create_runtime_str!("liberland"),
+	impl_name: create_runtime_str!("liberlandx"),
 	authoring_version: 1,
 	// The version of the runtime specification. A full node will not attempt to use its native
 	//   runtime in substitute for the on-chain Wasm runtime unless all of `spec_name`,
@@ -107,6 +107,7 @@ pub const VERSION: RuntimeVersion = RuntimeVersion {
 	impl_version: 1,
 	apis: RUNTIME_API_VERSIONS,
 	transaction_version: 1,
+	state_version: 1,
 };
 
 /// This determines the average expected block time that we are targeting.
@@ -196,6 +197,7 @@ impl frame_system::Config for Runtime {
 	type SS58Prefix = SS58Prefix;
 	/// The set code logic, just the default since we're not a parachain.
 	type OnSetCode = ();
+	type MaxConsumers = frame_support::traits::ConstU32<16>;
 }
 
 impl pallet_randomness_collective_flip::Config for Runtime {}
@@ -450,7 +452,7 @@ impl pallet_treasury::Config for Runtime {
 	type OnSlash = Treasury;
 	type ProposalBond = ProposalBond;
 	type ProposalBondMinimum = ProposalBondMinimum;
-	// type ProposalBondMaximum = ProposalBondMaximum;
+	type ProposalBondMaximum = ProposalBondMaximum;
 	type SpendPeriod = SpendPeriod;
 	type Burn = Burn;
 	type BurnDestination = Treasury;
@@ -465,7 +467,7 @@ impl pallet_bounties::Config for Runtime {
 	type BountyUpdatePeriod = BountyUpdatePeriod;
 	type BountyCuratorDeposit = BountyCuratorDeposit;
 	type BountyValueMinimum = BountyValueMinimum;
-	// type ChildBountyManager = ();
+	type ChildBountyManager = ();
 	type DataDepositPerByte = DataDepositPerByte;
 	type Event = Event;
 	type MaximumReasonLength = MaximumReasonLength;
@@ -487,7 +489,7 @@ impl pallet_assets::Config for Runtime {
 	type Currency = Balances;
 	type ForceOrigin = EnsureRoot<AccountId>;
 	type AssetDeposit = AssetDeposit;
-	// type AssetAccountDeposit = ConstU128<DOLLARS>;
+	type AssetAccountDeposit = frame_support::traits::ConstU128<DOLLARS>;
 	type MetadataDepositBase = MetadataDepositBase;
 	type MetadataDepositPerByte = MetadataDepositPerByte;
 	type ApprovalDeposit = ApprovalDeposit;
@@ -521,10 +523,6 @@ impl pallet_uniques::Config for Runtime {
 	type WeightInfo = ();
 }
 
-impl pallet_fruniques::Config for Runtime {
-	type Event = Event;
-}
-
 construct_runtime!(
 	pub enum Runtime where
 		Block = Block,
@@ -551,7 +549,6 @@ construct_runtime!(
 		Society: pallet_society,
 		Bounties: pallet_bounties,
 		Uniques: pallet_uniques,
-		Fruniques: pallet_fruniques,
 		Assets: pallet_assets,
 	}
 );
@@ -580,7 +577,7 @@ pub type Executive = frame_executive::Executive<
 	Block,
 	frame_system::ChainContext<Runtime>,
 	Runtime,
-	AllPallets,
+	AllPalletsWithSystem,
 >;
 
 impl_runtime_apis! {

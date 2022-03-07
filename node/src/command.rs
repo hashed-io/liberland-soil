@@ -3,13 +3,13 @@ use crate::{
 	cli::{Cli, Subcommand},
 	service,
 };
-use hashed_runtime::Block;
+use liberland_runtime::Block;
 use sc_cli::{ChainSpec, RuntimeVersion, SubstrateCli};
 use sc_service::PartialComponents;
 
 impl SubstrateCli for Cli {
 	fn impl_name() -> String {
-		"Hashed Chain".into()
+		"Liberland Soil Node".into()
 	}
 
 	fn impl_version() -> String {
@@ -34,17 +34,16 @@ impl SubstrateCli for Cli {
 
 	fn load_spec(&self, id: &str) -> Result<Box<dyn sc_service::ChainSpec>, String> {
 		Ok(match id {
-			"chaos" => Box::new(chain_spec::chaos_config()?),
+			"soil" => Box::new(chain_spec::soil_config()?),
 			"dev" => Box::new(chain_spec::development_config()?),
 			"" | "local" => Box::new(chain_spec::local_testnet_config()?),
-			path => {
-				Box::new(chain_spec::ChainSpec::from_json_file(std::path::PathBuf::from(path))?)
-			},
+			path =>
+				Box::new(chain_spec::ChainSpec::from_json_file(std::path::PathBuf::from(path))?),
 		})
 	}
 
 	fn native_runtime_version(_: &Box<dyn ChainSpec>) -> &'static RuntimeVersion {
-		&hashed_runtime::VERSION
+		&liberland_runtime::VERSION
 	}
 }
 
@@ -100,7 +99,7 @@ pub fn run() -> sc_cli::Result<()> {
 				Ok((cmd.run(client, backend), task_manager))
 			})
 		},
-		Some(Subcommand::Benchmark(cmd)) => {
+		Some(Subcommand::Benchmark(cmd)) =>
 			if cfg!(feature = "runtime-benchmarks") {
 				let runner = cli.create_runner(cmd)?;
 
@@ -109,8 +108,7 @@ pub fn run() -> sc_cli::Result<()> {
 				Err("Benchmarking wasn't enabled when building the node. You can enable it with \
 				     `--features runtime-benchmarks`."
 					.into())
-			}
-		},
+			},
 		None => {
 			let runner = cli.create_runner(&cli.run)?;
 			runner.run_node_until_exit(|config| async move {
