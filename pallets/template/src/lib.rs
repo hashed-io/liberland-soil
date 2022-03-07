@@ -16,12 +16,9 @@ mod benchmarking;
 
 #[frame_support::pallet]
 pub mod pallet {
-	use bdk::blockchain::{noop_progress, ElectrumBlockchain};
 	use frame_support::pallet_prelude::*;
 	use frame_system::pallet_prelude::*;
 
-	use bdk::electrum_client::Client;
-	use bdk::{database::MemoryDatabase, Wallet};
 	/// Configure the pallet by specifying the parameters and types on which it depends.
 	#[pallet::config]
 	pub trait Config: frame_system::Config {
@@ -74,28 +71,11 @@ pub mod pallet {
 			// https://docs.substrate.io/v3/runtime/origins
 			let who = ensure_signed(origin)?;
 
-			let _private_descriptor = "wpkh(tprv8ZgxMBicQKsPd4aJQ2f3nmwJ6bWm7Z4Vcem2GAMEDziTKmDMpNetmchqo6KewkXKy4By2DHZBJ7ZiK1Ccy6fidauw1bnqrP8JTzpntNLW58/*)";
-			let _public_descriptor = "wpkh(tpubD6NzVbkrYhZ4WXc6HgKeCBbQfd2hGtFQBxMoYgPXeGWrAFU8SmUUx7KhyEU8APbDY8pjTx9SbRs5ctniJxpZzha3m66HWrT7rJPA5gUv86W/*)#cy6nz2j5";
-			let client = Client::new("localhost:50000").unwrap();
-			let blockchain = ElectrumBlockchain::from(client);
-
-			let wallet = Wallet::new(
-				_public_descriptor,
-				Some(_public_descriptor),
-				bitcoin::Network::Regtest,
-				MemoryDatabase::default(),
-				blockchain,
-			)
-			.unwrap();
-			wallet.sync(noop_progress(), None).unwrap();
-
-			let balance = wallet.get_balance().unwrap();
-
 			// Update storage.
-			// <Something<T>>::put(balance.tryinto().clone());
+			//<Something<T>>::put(balance.tryinto().clone());
 
 			// Emit an event.
-			Self::deposit_event(Event::SomethingStored(balance.try_into().unwrap(), who));
+			//Self::deposit_event(Event::SomethingStored(balance.try_into().unwrap(), who));
 			// Return a successful DispatchResultWithPostInfo
 			Ok(())
 		}

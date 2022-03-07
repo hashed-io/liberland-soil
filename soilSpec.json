@@ -24,13 +24,13 @@
       },
       "aura": {
         "authorities": [
-          "5FTfAvbkFsh2jXfP6Jd6qHo4BVhogdHi2xQv14UV8QNijyS5"
+          "5HgHs1KJ4qbm18qVxdLMwkvh2oC8U6GGfUfrYYnhtxBDCGhi"
         ]
       },
       "grandpa": {
         "authorities": [
           [
-            "5H1DKm1RVQnhcr7T3ZA9pFLs3RVbgLMtdZpvT85riJaPb2MB",
+            "5HgHs1KJ4qbm18qVxdLMwkvh2oC8U6GGfUfrYYnhtxBDCGhi",
             1
           ]
         ]
@@ -38,18 +38,18 @@
       "balances": {
         "balances": [
           [
-            "5FTfAvbkFsh2jXfP6Jd6qHo4BVhogdHi2xQv14UV8QNijyS5",
+            "5HgHs1KJ4qbm18qVxdLMwkvh2oC8U6GGfUfrYYnhtxBDCGhi",
             1152921504606846976
           ],
           [
-            "5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty",
+            "5FxFUVhiCSysJwP6g1vVCSMDRDW5fNvRaK1Uarv75SWJ48JZ",
             1152921504606846976
           ]
         ]
       },
       "transactionPayment": null,
       "sudo": {
-        "key": "5FTfAvbkFsh2jXfP6Jd6qHo4BVhogdHi2xQv14UV8QNijyS5"
+        "key": "5HgHs1KJ4qbm18qVxdLMwkvh2oC8U6GGfUfrYYnhtxBDCGhi"
       },
       "indices": {
         "indices": []
@@ -58,8 +58,8 @@
       "council": {
         "phantom": null,
         "members": [
-          "5FbTcdX8WwfGa4Yri3bF7yE9UxL8yKgazVBYHn6t4ayMHRtL",
-          "5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty"
+          "5HgHs1KJ4qbm18qVxdLMwkvh2oC8U6GGfUfrYYnhtxBDCGhi",
+          "5FxFUVhiCSysJwP6g1vVCSMDRDW5fNvRaK1Uarv75SWJ48JZ"
         ]
       },
       "membership": {
