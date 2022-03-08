@@ -523,6 +523,45 @@ impl pallet_uniques::Config for Runtime {
 	type WeightInfo = ();
 }
 
+
+// pallet_staking_reward_curve::build! {
+// 	const I_NPOS: sp_runtime::curve::PiecewiseLinear<'static> = curve!(
+// 		min_inflation: 0_025_000,
+// 		max_inflation: 0_100_000,
+// 		ideal_stake: 0_500_000,
+// 		falloff: 0_050_000,
+// 		max_piece_count: 40,
+// 		test_precision: 0_005_000,
+// 	);
+// }
+// parameter_types! {
+// 	pub const RewardCurve: &'static sp_runtime::curve::PiecewiseLinear<'static> = &I_NPOS;
+// }
+// impl pallet_staking::Config for Runtime {
+// 	type MaxNominations = ConstU32<16>;
+// 	type Currency = Balances;
+// 	type UnixTime = pallet_timestamp::Pallet<Self>;
+// 	type CurrencyToVote = frame_support::traits::SaturatingCurrencyToVote;
+// 	type RewardRemainder = ();
+// 	type Event = Event;
+// 	type Slash = ();
+// 	type Reward = ();
+// 	type SessionsPerEra = ();
+// 	type SlashDeferDuration = ();
+// 	type SlashCancelOrigin = frame_system::EnsureRoot<AccountId>;
+// 	type BondingDuration = ();
+// 	type SessionInterface = Self;
+// 	type EraPayout = pallet_staking::ConvertCurve<RewardCurve>;
+// 	type NextNewSession = Session;
+// 	type MaxNominatorRewardedPerValidator = ConstU32<64>;
+// 	type OffendingValidatorsThreshold = ();
+// 	type ElectionProvider = onchain::OnChainSequentialPhragmen<Self>;
+// 	type GenesisElectionProvider = Self::ElectionProvider;
+// 	type MaxUnlockingChunks = ConstU32<32>;
+// 	type SortedListProvider = pallet_staking::UseNominatorsMap<Self>;
+// 	type BenchmarkingConfig = pallet_staking::TestBenchmarkingConfig;
+// 	type WeightInfo = ();
+// }
 construct_runtime!(
 	pub enum Runtime where
 		Block = Block,
