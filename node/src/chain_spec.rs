@@ -1,10 +1,10 @@
 use liberland_runtime::{
-	AccountId, AuraConfig, BalancesConfig, CouncilConfig, GenesisConfig, Grandpa, Signature,
-	SudoConfig, SystemConfig, WASM_BINARY,
+	AccountId, BabeConfig, BalancesConfig, GenesisConfig, GrandpaConfig, Signature, SudoConfig,
+	SystemConfig, WASM_BINARY,
 };
 use sc_chain_spec::Properties;
 use sc_service::ChainType;
-use sp_consensus_aura::sr25519::AuthorityId as AuraId;
+use sp_consensus_babe::AuthorityId as BabeId;
 use sp_core::{sr25519, Pair, Public};
 use sp_finality_grandpa::AuthorityId as GrandpaId;
 use sp_runtime::traits::{IdentifyAccount, Verify};
@@ -32,9 +32,9 @@ where
 	AccountPublic::from(get_from_seed::<TPublic>(seed)).into_account()
 }
 
-/// Generate an Aura authority key.
-pub fn authority_keys_from_seed(s: &str) -> (AuraId, GrandpaId) {
-	(get_from_seed::<AuraId>(s), get_from_seed::<GrandpaId>(s))
+/// Generate an babe authority key.
+pub fn authority_keys_from_seed(s: &str) -> (BabeId, GrandpaId) {
+	(get_from_seed::<BabeId>(s), get_from_seed::<GrandpaId>(s))
 }
 
 fn liberland_properties() -> sc_chain_spec::Properties {
@@ -182,7 +182,7 @@ pub fn soil_config() -> Result<ChainSpec, String> {
 /// Configure initial storage state for FRAME modules.
 fn testnet_genesis(
 	wasm_binary: &[u8],
-	initial_authorities: Vec<(AuraId, GrandpaId)>,
+	initial_authorities: Vec<(BabeId, GrandpaId)>,
 	root_key: AccountId,
 	endowed_accounts: Vec<AccountId>,
 	_enable_println: bool,
@@ -192,7 +192,7 @@ fn testnet_genesis(
 		balances: BalancesConfig {
 			balances: endowed_accounts.iter().cloned().map(|k| (k, 1 << 60)).collect(),
 		},
-		aura: AuraConfig {
+		babe: BabeConfig {
 			authorities: initial_authorities.iter().map(|x| (x.0.clone())).collect(),
 		},
 		grandpa: GrandpaConfig {
