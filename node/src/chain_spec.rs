@@ -1,5 +1,5 @@
 use liberland_runtime::{
-	AccountId, AuraConfig, BalancesConfig, CouncilConfig, GenesisConfig, GrandpaConfig, Signature,
+	AccountId, AuraConfig, BalancesConfig, CouncilConfig, GenesisConfig, Grandpa, Signature,
 	SudoConfig, SystemConfig, WASM_BINARY,
 };
 use sc_chain_spec::Properties;
