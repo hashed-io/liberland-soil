@@ -1,6 +1,6 @@
 use liberland_runtime::{
 	AccountId, BabeConfig, BalancesConfig, GenesisConfig, GrandpaConfig, Signature, SudoConfig,
-	SystemConfig, WASM_BINARY,
+	SystemConfig, WASM_BINARY, CouncilConfig,
 };
 use sc_chain_spec::Properties;
 use sc_service::ChainType;
@@ -213,5 +213,8 @@ fn testnet_genesis(
 		// bounties: Default::default(),
 		sudo: SudoConfig { key: Some(root_key) },
 		transaction_payment: Default::default(),
+		session: Default::default(),
+		babe: Default::default(),
+		staking: Default::default(),
 	}
 }
