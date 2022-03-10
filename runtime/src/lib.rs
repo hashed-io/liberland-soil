@@ -524,19 +524,20 @@ impl pallet_uniques::Config for Runtime {
 }
 
 
-// pallet_staking_reward_curve::build! {
-// 	const I_NPOS: sp_runtime::curve::PiecewiseLinear<'static> = curve!(
-// 		min_inflation: 0_025_000,
-// 		max_inflation: 0_100_000,
-// 		ideal_stake: 0_500_000,
-// 		falloff: 0_050_000,
-// 		max_piece_count: 40,
-// 		test_precision: 0_005_000,
-// 	);
-// }
-// parameter_types! {
-// 	pub const RewardCurve: &'static sp_runtime::curve::PiecewiseLinear<'static> = &I_NPOS;
-// }
+pallet_staking_reward_curve::build! {
+	const I_NPOS: sp_runtime::curve::PiecewiseLinear<'static> = curve!(
+		min_inflation: 0_025_000,
+		max_inflation: 0_100_000,
+		ideal_stake: 0_500_000,
+		falloff: 0_050_000,
+		max_piece_count: 40,
+		test_precision: 0_005_000,
+	);
+}
+parameter_types! {
+	pub const RewardCurve: &'static sp_runtime::curve::PiecewiseLinear<'static> = &I_NPOS;
+	//type ElectionProvider = onchain::OnChainSequentialPhragmen<Self>;
+}
 // impl pallet_staking::Config for Runtime {
 // 	type MaxNominations = ConstU32<16>;
 // 	type Currency = Balances;

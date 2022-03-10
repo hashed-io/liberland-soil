@@ -61,7 +61,7 @@ hex-literal = { version = "0.3.4", optional = true }
 
 # Liberland testing pallets
 pallet-staking = {version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.17"}
-
+pallet-staking-reward-curve = {version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.17"}
 # Local Dependencies
 pallet-template = { version = "4.0.0-dev", default-features = false, path = "../pallets/template" }
 
@@ -108,6 +108,7 @@ std = [
 	"sp-std/std",
 	"sp-transaction-pool/std",
 	"sp-version/std",
+	"pallet-staking/std"
 ]
 runtime-benchmarks = [
 	"frame-benchmarking/runtime-benchmarks",
