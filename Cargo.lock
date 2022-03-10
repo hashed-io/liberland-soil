@@ -2731,8 +2731,12 @@ dependencies = [
  "clap 3.1.6",
  "frame-benchmarking 4.0.0-dev (git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.17)",
  "frame-benchmarking-cli",
+ "futures 0.3.21",
+ "hex-literal",
  "jsonrpc-core",
  "liberland-runtime",
+ "pallet-im-online",
+ "pallet-mmr-rpc",
  "pallet-transaction-payment-rpc",
  "sc-basic-authorship",
  "sc-chain-spec",
@@ -2754,6 +2758,7 @@ dependencies = [
  "sc-transaction-pool",
  "sc-transaction-pool-api",
  "sp-api 4.0.0-dev (git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.17)",
+ "sp-authority-discovery",
  "sp-block-builder",
  "sp-blockchain",
  "sp-consensus",
@@ -2763,6 +2768,7 @@ dependencies = [
  "sp-keystore 0.11.0 (git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.17)",
  "sp-runtime 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.17)",
  "sp-timestamp",
+ "sp-transaction-pool",
  "structopt",
  "substrate-build-script-utils",
  "substrate-frame-rpc-system",
@@ -4520,6 +4526,23 @@ dependencies = [
  "sp-core 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.17)",
  "sp-runtime 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.17)",
  "sp-std 4.0.0 (git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.17)",
+]
+
+[[package]]
+name = "pallet-mmr-rpc"
+version = "3.0.0"
+source = "git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.17#22d40c761a985482f93bbbea5ba4199bdba74f8e"
+dependencies = [
+ "jsonrpc-core",
+ "jsonrpc-core-client",
+ "jsonrpc-derive",
+ "pallet-mmr-primitives",
+ "parity-scale-codec",
+ "serde",
+ "sp-api 4.0.0-dev (git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.17)",
+ "sp-blockchain",
+ "sp-core 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.17)",
+ "sp-runtime 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.17)",
 ]
 
 [[package]]

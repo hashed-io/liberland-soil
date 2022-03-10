@@ -1,6 +1,7 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 // `construct_runtime!` does a lot of recursion and requires us to increase the limit to 256.
 #![recursion_limit = "256"]
+//#![recursion_limit = "1024"]
 
 use codec::{Decode, Encode, MaxEncodedLen};
 use frame_election_provider_support::onchain;
@@ -22,7 +23,7 @@ use frame_system::{
 	EnsureRoot,
 };
 pub use node_primitives::{AccountId, Signature};
-use node_primitives::{AccountIndex, Balance, BlockNumber, Hash, Index, Moment};
+pub use node_primitives::{AccountIndex, Balance, BlockNumber, Hash, Index, Moment};
 use pallet_contracts::weights::WeightInfo;
 use pallet_grandpa::{
 	fg_primitives, AuthorityId as GrandpaId, AuthorityList as GrandpaAuthorityList,
@@ -92,6 +93,32 @@ pub fn wasm_binary_unwrap() -> &'static [u8] {
 		 the flag disabled.",
 	)
 }
+
+/// Opaque types. These are used by the CLI to instantiate machinery that don't need to know
+/// the specifics of the runtime. They can then be made to be agnostic over specific formats
+/// of data like extrinsics, allowing for them to continue syncing the network through upgrades
+/// to even the core data structures.
+pub mod opaque {
+    pub use super::*;
+    /// Opaque block header type.
+    pub type Header = generic::Header<BlockNumber, BlakeTwo256>;
+    /// Opaque block type.
+    pub type Block = generic::Block<Header, UncheckedExtrinsic>;
+    /// Opaque block identifier type.
+    pub type BlockId = generic::BlockId<Block>;
+
+    pub use sp_runtime::OpaqueExtrinsic as UncheckedExtrinsic;
+
+}
+impl_opaque_keys! {
+	pub struct SessionKeys {
+		pub grandpa: Grandpa,
+		pub babe: Babe,
+		pub im_online: ImOnline,
+		pub authority_discovery: AuthorityDiscovery,
+	}
+}
+
 
 /// Runtime version.
 #[sp_version::runtime_version]
@@ -462,14 +489,7 @@ impl pallet_authorship::Config for Runtime {
 	type EventHandler = (Staking, ImOnline);
 }
 
-impl_opaque_keys! {
-	pub struct SessionKeys {
-		pub grandpa: Grandpa,
-		pub babe: Babe,
-		pub im_online: ImOnline,
-		pub authority_discovery: AuthorityDiscovery,
-	}
-}
+
 
 impl pallet_session::Config for Runtime {
 	type Event = Event;
