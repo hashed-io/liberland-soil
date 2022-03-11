@@ -103,6 +103,10 @@ pallet-transaction-storage = { version = "4.0.0-dev", default-features = false, 
 pallet-uniques = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.17" }
 pallet-vesting = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.17" }
 
+# We enable it only for web-wasm check
+# See https://docs.rs/getrandom/0.2.1/getrandom/#webassembly-support
+getrandom = { version = "0.2", features = ["js"], optional = true }
+
 [build-dependencies]
 substrate-wasm-builder = { version = "5.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.17" }
 
@@ -110,6 +114,7 @@ substrate-wasm-builder = { version = "5.0.0-dev", git = "https://github.com/pari
 default = ["std"]
 with-tracing = ["frame-executive/with-tracing"]
 std = [
+	"getrandom/std",
 	"sp-authority-discovery/std",
 	"pallet-assets/std",
 	"pallet-authority-discovery/std",
